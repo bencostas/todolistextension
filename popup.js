@@ -3,28 +3,18 @@ var button = document.querySelector('button');
 var list = document.querySelector('ul');
 let close = document.getElementsByClassName("delete");
 var newTask = document.querySelector('#currentTask');
-let todos = document.querySelectorAll('ul li');
-
 
 // Delete todo
 function deleteToDo() {
   for (let i = 0; i < close.length; i++) {
     close[i].onclick = function() {
       var div = this.parentElement;
-      localStorage.removeItem(div.value);
+      localStorage.removeItem(localStorage.key(i));
       console.log("removed" + div.value);
       div.remove();
     }
   }
 }
-
-// Clicking on the task will make it checked
-
-list.addEventListener('click', function(ev) {
-  if (ev.target.tagName === 'LI') {
-    ev.target.classList.toggle('checked');
-  }
-}, false);
 
 //Add todo
 
@@ -39,7 +29,7 @@ button.addEventListener('click', function(ev) {
     }
     else {
       list.innerHTML += '<li><span class="delete">&#215</span> ' + newTask.value + '</li>';
-      localStorage.setItem("tasks", newTask.value);
+      localStorage.setItem(newTask.value, newTask.value);
       console.log("Value is:" + newTask.value);
       newTask.value = '';
     }
@@ -48,3 +38,10 @@ button.addEventListener('click', function(ev) {
   deleteToDo();
 }, false);
 
+
+//Output saved Todos in local storage
+for (var i = 0; i < localStorage.length; i++) {
+  console.log(localStorage.getItem(localStorage.key(i)));
+  list.innerHTML += '<li class="checked"><span class="delete">&#215</span> ' + localStorage.key(i) + '</li>';
+  deleteToDo();
+}
