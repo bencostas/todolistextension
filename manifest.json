@@ -1,0 +1,19 @@
+{
+    "name": "To Do",
+    "version": "1.0",
+    "description": "Keep your todo list within your browser!",
+    "manifest_version": 2,
+    "content_scripts": [
+        {
+            "matches": ["<all_urls>"],
+            "js": ["popup.js"]
+        }
+    ],
+    "permissions": [
+        "storage"
+    ],
+    "browser_action": {
+        "default_popup": "popup.html"
+    }
+    
+}
